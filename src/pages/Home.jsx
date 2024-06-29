@@ -50,11 +50,11 @@ function Home() {
         );
       } else if (filters.dateFilter === "greater") {
         filtered = filtered.filter(
-          (student) => new Date(student.birthDate) > new Date(filters.date)
+          (student) => new Date(student.birthDate.substring(0, 10)) > new Date(filters.date)
         );
       } else if (filters.dateFilter === "less") {
         filtered = filtered.filter(
-          (student) => new Date(student.birthDate) < new Date(filters.date)
+          (student) => new Date(student.birthDate.substring(0, 10)) < new Date(filters.date)
         );
       }
     }

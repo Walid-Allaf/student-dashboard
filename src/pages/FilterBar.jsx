@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, TextField, Button, MenuItem, FormControl, Select, Typography } from "@mui/material";
+import { Box, TextField, MenuItem, FormControl, Select, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { Filter } from "../assets";
 import { t } from "i18next";
@@ -23,11 +23,14 @@ function FilterBar({ onFilter }) {
         </Typography>
       </Box>
       <TextField
-        placeholder="Search by first name, last name"
+        placeholder={t("Search by first name, last name")}
         variant="outlined"
         size="small"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          setName(e.target.value);
+          onFilter({ name: e.target.value, date, dateFilter });
+        }}
       />
 
       <Box display="flex" alignItems="center">
@@ -55,11 +58,14 @@ function FilterBar({ onFilter }) {
           <Select
             sx={{ "& .MuiOutlinedInput-notchedOutline": { border: "none", outline: "none" } }}
             value={dateFilter}
-            onChange={(e) => setDateFilter(e.target.value)}
+            onChange={(e) => {
+              setDateFilter(e.target.value);
+              onFilter({ name, date, dateFilter: e.target.value });
+            }}
           >
-            <MenuItem value="equal">Equal to</MenuItem>
-            <MenuItem value="greater">Greater than</MenuItem>
-            <MenuItem value="less">Less than</MenuItem>
+            <MenuItem value="equal">{t("Equal to")}</MenuItem>
+            <MenuItem value="greater">{t("Greater than")}</MenuItem>
+            <MenuItem value="less">{t("Less than")}</MenuItem>
           </Select>
           <Box sx={{ width: "1px", height: "30px", background: "#77747438" }}></Box>
           <TextField
@@ -73,14 +79,11 @@ function FilterBar({ onFilter }) {
             sx={{ "& .MuiOutlinedInput-notchedOutline": { border: "none", outline: "none" } }}
             onChange={(e) => {
               setDate(e.target.value);
+              onFilter({ name, date: e.target.value, dateFilter });
             }}
           />
         </FormControl>
       </Box>
-
-      <Button variant="contained" color="primary" onClick={handleFilter}>
-        Filter
-      </Button>
     </Box>
   );
 }

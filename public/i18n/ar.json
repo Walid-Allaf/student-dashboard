@@ -21,5 +21,9 @@
   "Filter By": "الفلترة حسب :",
   "Add Student": "إضافة طالب",
   "Modify Student Data": "تعديل بيانات طالب",
+  "Search by first name, last name": "البحث حسب الاسم الاول، الاسم الاخير",
+  "Equal to": "يساوي",
+  "Greater than": "أكبر من",
+  "Less than": "أقل من",
   "user": "Mi nombre es: {{name}}"
 }

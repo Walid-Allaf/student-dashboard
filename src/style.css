@@ -24,21 +24,38 @@ thead th {
   font-weight: 600;
 }
 
-thead th:nth-child(1) {
+body[dir="ltr"] thead th:nth-child(1) {
   border-top-left-radius: 11px !important;
   border-bottom-left-radius: 11px !important;
 }
-thead th:last-child {
+body[dir="ltr"] thead th:last-child {
   border-top-right-radius: 11px !important;
   border-bottom-right-radius: 11px !important;
 }
-tbody tr td:nth-child(1) {
+body[dir="ltr"] tbody tr td:nth-child(1) {
   border-top-left-radius: 8px !important;
   border-bottom-left-radius: 8px !important;
 }
-tbody tr td:last-child {
+body[dir="ltr"] tbody tr td:last-child {
   border-top-right-radius: 11px !important;
   border-bottom-right-radius: 11px !important;
+}
+
+body[dir="rtl"] thead th:nth-child(1) {
+  border-top-right-radius: 11px !important;
+  border-bottom-right-radius: 11px !important;
+}
+body[dir="rtl"] thead th:last-child {
+  border-top-left-radius: 11px !important;
+  border-bottom-left-radius: 11px !important;
+}
+body[dir="rtl"] tbody tr td:nth-child(1) {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+body[dir="rtl"] tbody tr td:last-child {
+  border-top-left-radius: 11px !important;
+  border-bottom-left-radius: 11px !important;
 }
 tbody tr:nth-child(2n + 1) {
   background: #eef5f9;

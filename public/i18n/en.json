@@ -22,5 +22,9 @@
   "Filter By": "Filter By :",
   "Add Student": "Add Student",
   "Modify Student Data": "Modify Student Data",
+  "Search by first name, last name": "Search by first name, last name",
+  "Equal to": "Equal to",
+  "Greater than": "Greater than",
+  "Less than": "Less than",
   "user": "My name is: {{name}}"
 }
