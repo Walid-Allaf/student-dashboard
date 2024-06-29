@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,110..900;1,110..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,110..900;1,110..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Work Sans", sans-serif !important;
+}
+.roboto {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+table td {
+  height: 51px;
+  color: #212224;
+  padding: 0 16px !important;
+  border: none !important;
+}
+thead th {
+  text-wrap: nowrap;
+  height: 78px;
+  color: #fff !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+thead th:nth-child(1) {
+  border-top-left-radius: 11px !important;
+  border-bottom-left-radius: 11px !important;
+}
+thead th:last-child {
+  border-top-right-radius: 11px !important;
+  border-bottom-right-radius: 11px !important;
+}
+tbody tr td:nth-child(1) {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+}
+tbody tr td:last-child {
+  border-top-right-radius: 11px !important;
+  border-bottom-right-radius: 11px !important;
+}
+tbody tr:nth-child(2n + 1) {
+  background: #eef5f9;
+  margin-left: 10px;
+}
