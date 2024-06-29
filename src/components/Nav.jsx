@@ -78,9 +78,9 @@ const Nav = () => {
       </Box>
       <ConfirmDialog
         dialogVariant="primary"
-        title="Sign out"
-        subTitle="Are you sure you would like to sign out of your account?"
-        confirmButtonText="Sging out"
+        title={t("Sign out")}
+        subTitle={t("Are you sure you would like to sign out of your account?")}
+        confirmButtonText={t("Sign out")}
         open={open}
         close={() => setOpen(false)}
         onSubmit={() => setToken(null)}

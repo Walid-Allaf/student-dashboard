@@ -25,5 +25,15 @@
   "Equal to": "يساوي",
   "Greater than": "أكبر من",
   "Less than": "أقل من",
+  "Sign out": "تسجيل الخروج",
+  "Are you sure you would like to sign out of your account?": "هل انت متأكد من تسجيل الخروج من حسابك؟",
+  "Are you sure ?": "هل انت متتأكد ؟",
+  "Are you sure you want to delete this student's information ?": "هل انت متأكد من حذف معلومات هذا الطالب ؟",
+  " This action cannot be undone.": "لايمكن التراجع عن هذا الاجراء",
+  "Delete": "حذف",
+  "Login": "تسجيل الدخول",
+  "Username": "اسم المستخدم",
+  "Password": "كلمة المرور",
+  "Sign in": "تسجيل الدخول",
   "user": "Mi nombre es: {{name}}"
 }

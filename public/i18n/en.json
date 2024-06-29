@@ -26,5 +26,15 @@
   "Equal to": "Equal to",
   "Greater than": "Greater than",
   "Less than": "Less than",
+  "Sign out": "Sign out",
+  "Are you sure you would like to sign out of your account?": "Are you sure you would like to sign out of your account?",
+  "Are you sure ?": "Are you sure ?",
+  "Are you sure you want to delete this student's information ?": "Are you sure you want to delete this student's information ?",
+  " This action cannot be undone.": " This action cannot be undone.",
+  "Delete": "Delete",
+  "Login": "Login",
+  "Username": "Username",
+  "Password": "Password",
+  "Sign in": "Sign in",
   "user": "My name is: {{name}}"
 }

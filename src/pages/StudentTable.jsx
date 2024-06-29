@@ -192,10 +192,10 @@ function StudentTable({ students, loading, onSort, sortOrder, onDelete }) {
 
       <ConfirmDialog
         dialogVariant="error"
-        title="Are you sure ?"
-        subTitle="Are you sure you want to delete this student's information ?"
-        addtional=" This action cannot be undone."
-        confirmButtonText="Delete"
+        title={t("Are you sure ?")}
+        subTitle={t("Are you sure you want to delete this student's information ?")}
+        addtional={t(" This action cannot be undone.")}
+        confirmButtonText={t("Delete")}
         open={openDelete}
         close={() => setOpenDelete(false)}
         onSubmit={deleteStudent}

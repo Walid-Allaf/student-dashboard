@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -10,11 +10,19 @@ import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import toast from "react-hot-toast";
 import axios from "../../api/axios";
+import { t } from "i18next";
+import { ChangeLanguage } from "../../components";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { setToken, setUser } = useStateContext();
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+  const [lang, setLang] = useState(0);
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    setLang(i18n.dir() == "ltr" ? 0 : 1);
+  }, [i18n.dir()]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -57,6 +65,16 @@ const Login = () => {
               placeItems: "center",
             }}
           >
+            <Box
+              sx={{
+                position: "absolute",
+                top: 40,
+                right: lang == 0 ? 0 : 40,
+                left: lang == 0 ? 40 : 0,
+              }}
+            >
+              <ChangeLanguage />
+            </Box>
             <img src={LoginBg} alt="login-bg" />
           </Box>
         </Grid>
@@ -90,11 +108,11 @@ const Login = () => {
             <Typography
               sx={{ fontSize: { xs: "36px", md: "55px" }, fontWeight: 600, color: "#212224" }}
             >
-              Login
+              {t("Login")}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Stack dir="column" spacing={2}>
-                <InputLabel>Username</InputLabel>
+                <InputLabel>{t("Username")}</InputLabel>
 
                 <OutlinedInput
                   required
@@ -104,7 +122,7 @@ const Login = () => {
                   autoComplete="username"
                 />
 
-                <InputLabel>Password</InputLabel>
+                <InputLabel>{t("Password")}</InputLabel>
 
                 <OutlinedInput
                   required
@@ -124,7 +142,7 @@ const Login = () => {
                   sx={{ mt: 10 }}
                   loading={loading}
                 >
-                  {loading ? "signin..." : "Sign in"}
+                  {t("Sign in")}
                 </LoadingButton>
               </Stack>
             </Box>

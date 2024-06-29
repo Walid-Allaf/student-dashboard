@@ -2,6 +2,7 @@ import { Box, Button, Dialog, DialogActions, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { Info, Logout } from "../assets";
 import theme from "../themes";
+import { t } from "i18next";
 
 const ConfirmDialog = (props) => {
   const { title, subTitle, addtional, dialogVariant, onSubmit, confirmButtonText, close, open } =
@@ -70,7 +71,7 @@ const ConfirmDialog = (props) => {
             {confirmButtonText}
           </Button>
           <Button color={dialogVariant} variant="outlined" onClick={close}>
-            Cancel
+            {t("Cancel")}
           </Button>
         </DialogActions>
       </Box>
