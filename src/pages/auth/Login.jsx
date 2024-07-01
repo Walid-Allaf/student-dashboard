@@ -37,7 +37,6 @@ const Login = () => {
         setLoading(false);
         setToken(res.data.token);
         setUser(res.data.userName);
-        // navigate(0);
       })
       .catch((err) => {
         setLoading(false);

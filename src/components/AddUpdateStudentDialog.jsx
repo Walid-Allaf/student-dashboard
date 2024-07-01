@@ -125,7 +125,7 @@ const AddUpdateStudentDialog = (props) => {
         sx={{
           maxWidth: "1000px",
           minWidth: "300px",
-          fontSize: { xs: "26px", sm: "30px" },
+          fontSize: { xs: "24px", sm: "30px" },
           fontWeight: 600,
           color: "#212224",
         }}

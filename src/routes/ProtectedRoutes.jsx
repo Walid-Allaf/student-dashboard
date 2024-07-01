@@ -96,7 +96,7 @@ const ProtectedRoutes = (props) => {
             </Box>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Typography>{user}</Typography>
+            <Typography sx={{ display: { xs: "none", sm: "block" } }}>{user}</Typography>
             <img src={UserPhoto} alt="user-photo" width={36} height={36} />
             <ChangeLanguage />
           </Box>
