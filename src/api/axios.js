@@ -38,7 +38,6 @@ axios.interceptors.response.use(
     } else if (error.response.status === 401) {
       // logoutFunc();
       // window.location.href = "/auth/signin";
-      // redirect("/auth/signin");
       console.log(error);
     } else if (error.response.status === 403) {
       window.location.href = "/403";

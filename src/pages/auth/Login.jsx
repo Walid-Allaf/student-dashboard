@@ -9,7 +9,7 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import toast from "react-hot-toast";
-import axios from "../../api/axios";
+import axios from "axios";
 import { t } from "i18next";
 import { ChangeLanguage } from "../../components";
 import { useTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ const Login = () => {
     setLoading(true);
     const data = new FormData(event.currentTarget);
     axios
-      .post("/User/SignIn", {
+      .post(`${import.meta.env.VITE_API_BASE_URL}/User/SignIn`, {
         userName: data.get("username"),
         password: data.get("password"),
       })
@@ -38,6 +38,7 @@ const Login = () => {
         setToken(res.data.token);
         setUser(res.data.userName);
         navigate("/");
+        navigate(0);
       })
       .catch((err) => {
         setLoading(false);

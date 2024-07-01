@@ -11,6 +11,7 @@ import {
   TableSortLabel,
   CircularProgress,
   Box,
+  Paper,
 } from "@mui/material";
 import theme from "../themes";
 import { getColoredCircle, getGenderImg } from "../utils";
@@ -78,7 +79,7 @@ function StudentTable({ students, loading, onSort, sortOrder, onDelete }) {
   };
 
   return (
-    <>
+    <Paper sx={{ maxWidth: "100%" }}>
       <TableContainer>
         <Table>
           <TableHead sx={{ background: theme.palette.primary.main, borderRadius: "10px" }}>
@@ -141,22 +142,24 @@ function StudentTable({ students, loading, onSort, sortOrder, onDelete }) {
                     <TableCell>{student.phone}</TableCell>
                     <TableCell>{student.remarks}</TableCell>
                     <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          setOpenDelete(true);
-                          setStudentId(student.id);
-                        }}
-                      >
-                        <img src={Delete} alt="delete" width={20} height={20} />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => {
-                          setInitialValues(student);
-                          setOpen(true);
-                        }}
-                      >
-                        <img src={Edit} alt="edit" width={20} height={20} />
-                      </IconButton>
+                      <Box sx={{ display: "flex", flexWrap: "nowrap" }}>
+                        <IconButton
+                          onClick={() => {
+                            setOpenDelete(true);
+                            setStudentId(student.id);
+                          }}
+                        >
+                          <img src={Delete} alt="delete" width={20} height={20} />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            setInitialValues(student);
+                            setOpen(true);
+                          }}
+                        >
+                          <img src={Edit} alt="edit" width={20} height={20} />
+                        </IconButton>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))
@@ -170,7 +173,6 @@ function StudentTable({ students, loading, onSort, sortOrder, onDelete }) {
           </TableBody>
         </Table>
       </TableContainer>
-
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
@@ -200,7 +202,7 @@ function StudentTable({ students, loading, onSort, sortOrder, onDelete }) {
         close={() => setOpenDelete(false)}
         onSubmit={deleteStudent}
       />
-    </>
+    </Paper>
   );
 }
 StudentTable.propTypes = {

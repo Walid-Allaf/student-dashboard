@@ -1,19 +1,21 @@
-import Logo from "./logo.png";
-import LoginBg from "./login-bg.png";
-import LoginBlueBg from "./login-blue-bg.png";
-import Student from "./student.png";
-import Power from "./power.png";
+import Logo from "./logo.svg";
+import LoginBg from "./login-bg.svg";
+import LoginBlueBg from "./login-blue-bg.svg";
+import Student from "./student.svg";
+import Power from "./power.svg";
 
-import Male from "./male.png";
-import Female from "./female.png";
+import Male from "./male.svg";
+import Female from "./female.svg";
 
-import Filter from "./filter.png";
-import Plus from "./plus.png";
+import Filter from "./filter.svg";
+import Plus from "./plus.svg";
 
-import Edit from "./edit.png";
-import Delete from "./delete.png";
-import Info from "./info-circle.png";
-import Logout from "./logout.png";
+import Edit from "./edit.svg";
+import Delete from "./delete.svg";
+import Info from "./info-circle.svg";
+import Logout from "./logout.svg";
+import Search from "./search.svg";
+import UserPhoto from "./user-photo.svg";
 
 export {
   LoginBg,
@@ -29,4 +31,6 @@ export {
   Delete,
   Info,
   Logout,
+  Search,
+  UserPhoto,
 };

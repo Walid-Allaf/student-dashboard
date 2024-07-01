@@ -5,6 +5,8 @@ import Nav from "../components/Nav";
 import { useStateContext } from "../contexts/ContextProvider";
 import { ChangeLanguage } from "../components";
 import { useTranslation } from "react-i18next";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Logo, UserPhoto } from "../assets";
 
 const ProtectedRoutes = (props) => {
   const { window } = props;
@@ -48,7 +50,7 @@ const ProtectedRoutes = (props) => {
     <Box
       sx={{
         display: "flex",
-        minHeight: "100vh",
+        // minHeight: "100vh",
         background: "#EEF5F9",
         "& .MuiPaper-root": { borderRadius: 0 },
       }}
@@ -61,28 +63,41 @@ const ProtectedRoutes = (props) => {
           m: { sm: dir == "ltr" ? `0 0 ${drawerWidth}px 0` : `0 ${drawerWidth}px 0 0` },
           bgcolor: "#fff",
           borderLeft: "1px solid #E8E8E8",
+          borderBottom: "2px solid #E8E8E8",
+          justifyContent: "center",
         }}
       >
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: { xs: "space-between", sm: "flex-end" },
             alignItems: "center",
           }}
         >
-          <Box>
+          <Box
+            sx={{
+              mr: 2,
+              display: { xs: "flex", sm: "none" },
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: 2,
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
             >
-              &&
+              <MenuIcon color="primary" />
             </IconButton>
+            <Box sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
+              <img src={Logo} alt="logo" />
+            </Box>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Typography>{user}</Typography>
+            <img src={UserPhoto} alt="user-photo" width={36} height={36} />
             <ChangeLanguage />
           </Box>
         </Toolbar>
@@ -102,7 +117,7 @@ const ProtectedRoutes = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "flex", sm: "none" },
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               minHeight: "100vh",
@@ -115,7 +130,7 @@ const ProtectedRoutes = (props) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", sm: "flex" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -134,8 +149,8 @@ const ProtectedRoutes = (props) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          height: "92vh",
+          width: `calc(100% - ${drawerWidth}px)`,
+          minHeight: "92vh",
         }}
       >
         <Toolbar />

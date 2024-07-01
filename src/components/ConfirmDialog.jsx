@@ -12,7 +12,7 @@ const ConfirmDialog = (props) => {
       <Box
         sx={{
           maxWidth: "483px",
-          minWidth: "483px",
+          minWidth: { xs: "280px", sm: "400px" },
           height: "147px",
           display: "grid",
           placeItems: "center",

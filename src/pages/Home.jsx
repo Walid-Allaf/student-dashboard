@@ -81,7 +81,7 @@ function Home() {
   return (
     <Box
       sx={{
-        height: "100%",
+        // minHeight: "100%",
         background: "#fff",
         borderRadius: "11px",
         border: "1px solid #00000026",
@@ -90,7 +90,7 @@ function Home() {
     >
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Typography sx={{ fontSize: "35px", fontWeight: 500, color: "#000" }}>
+          <Typography sx={{ fontSize: { xs: "28px", md: "35px" }, fontWeight: 500, color: "#000" }}>
             {t("Students Data")}
           </Typography>
           <Button
@@ -98,7 +98,9 @@ function Home() {
             onClick={() => setOpen(true)}
             sx={{ display: "flex", gap: 1 }}
           >
-            <span style={{ textWrap: "nowrap" }}>{t("Add Student")}</span>
+            <Box component="span" sx={{ textWrap: "nowrap", display: { xs: "none", sm: "block" } }}>
+              {t("Add Student")}
+            </Box>
             <img src={Plus} alt="plus" width={20} height={20} />
           </Button>
         </Box>

@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Box, TextField, MenuItem, FormControl, Select, Typography } from "@mui/material";
+import {
+  Box,
+  TextField,
+  MenuItem,
+  FormControl,
+  Select,
+  Typography,
+  InputAdornment,
+} from "@mui/material";
 import PropTypes from "prop-types";
-import { Filter } from "../assets";
+import { Filter, Search } from "../assets";
 import { t } from "i18next";
 
 function FilterBar({ onFilter }) {
@@ -15,7 +23,14 @@ function FilterBar({ onFilter }) {
   };
 
   return (
-    <Box display="flex" alignItems="center" gap={2} height={49} mb={2}>
+    <Box
+      display="flex"
+      flexDirection={{ xs: "column", md: "row" }}
+      alignItems={{ xs: "flex-start", md: "center" }}
+      gap={2}
+      minHeight={49}
+      mb={2}
+    >
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         <img src={Filter} alt="filter-by" width={24} height={24} />
         <Typography color="primary.main" sx={{ textWrap: "nowrap" }}>
@@ -30,6 +45,13 @@ function FilterBar({ onFilter }) {
         onChange={(e) => {
           setName(e.target.value);
           onFilter({ name: e.target.value, date, dateFilter });
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <img src={Search} alt="search" />
+            </InputAdornment>
+          ),
         }}
       />
 

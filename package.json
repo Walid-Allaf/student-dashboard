@@ -12,10 +12,12 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.21",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.20",
     "@mui/x-date-pickers": "^7.7.1",
     "axios": "^1.7.2",
+    "country-state-city": "^3.2.1",
     "dayjs": "^1.11.11",
     "formik": "^2.4.6",
     "i18next": "^23.11.5",

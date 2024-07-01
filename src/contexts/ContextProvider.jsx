@@ -10,7 +10,7 @@ const StateContext = createContext({
 });
 
 export const ContextProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const [user, _setUser] = useState(sessionStorage.getItem("username") || "");
   const [token, _setToken] = useState(sessionStorage.getItem("TOKEN") || null);
   const [notification, _setNotification] = useState("");
 
@@ -20,6 +20,14 @@ export const ContextProvider = ({ children }) => {
       sessionStorage.setItem("TOKEN", token);
     } else {
       sessionStorage.removeItem("TOKEN");
+    }
+  };
+  const setUser = (username) => {
+    _setUser(username);
+    if (username) {
+      sessionStorage.setItem("username", username);
+    } else {
+      sessionStorage.removeItem("username");
     }
   };
 

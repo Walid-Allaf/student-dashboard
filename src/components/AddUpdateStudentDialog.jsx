@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   CircularProgress,
@@ -12,6 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Country, State } from "country-state-city";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import React, { useEffect } from "react";
@@ -20,7 +22,6 @@ import PropTypes from "prop-types";
 import axios from "../api/axios";
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
-import { CITIES, COUNTRIES } from "../constance";
 
 const AddUpdateStudentDialog = (props) => {
   const { onClose, open, initialValues, update } = props;
@@ -31,8 +32,8 @@ const AddUpdateStudentDialog = (props) => {
     lastName: Yup.string().required("Last name is required"),
     // birthDate: Yup.date().required("Birth date is required"),
     grade: Yup.string().required("Grade is required"),
-    country: Yup.string().required("Country is required"),
-    city: Yup.string().required("City is required"),
+    // country: Yup.string().required("Country is required"),
+    // city: Yup.string().required("City is required"),
     phone: Yup.string().required(" ").matches(/^\d+$/, "Must be only digits"),
     gender: Yup.string().required("Gender is required"),
     remarks: Yup.string(),
@@ -46,6 +47,27 @@ const AddUpdateStudentDialog = (props) => {
   const [loadingGrades, setLoadingGrades] = React.useState(true);
   const [loadingGenders, setLoadingGenders] = React.useState(true);
   const [lang, setLang] = React.useState(0);
+
+  // FOR COUNTRIES
+  const [countries, setCountries] = React.useState([]);
+  const [states, setStates] = React.useState([]);
+  const [selectedCountry, setSelectedCountry] = React.useState(null);
+  const [selectedState, setSelectedState] = React.useState(null);
+
+  const handleCountryChange = (event, newValue) => {
+    setSelectedCountry(newValue);
+    if (newValue) {
+      const countryStates = State.getStatesOfCountry(newValue.isoCode);
+      setStates(countryStates);
+    } else {
+      setStates([]);
+    }
+    setSelectedState(null);
+  };
+
+  const handleStateChange = (event, newValue) => {
+    setSelectedState(newValue);
+  };
 
   const getGrades = () => {
     axios
@@ -77,7 +99,16 @@ const AddUpdateStudentDialog = (props) => {
   };
 
   useEffect(() => {
-    console.log(initialValues);
+    const allCountries = Country.getAllCountries();
+    setCountries(allCountries);
+    if (initialValues.id) {
+      const country = allCountries.filter((country) => country.name === initialValues.country)[0];
+      const countryStates = State.getStatesOfCountry(country.isoCode);
+      setSelectedState(countryStates.filter((state) => state.name === initialValues.city)[0]);
+      setStates(countryStates);
+      setSelectedCountry(country);
+    }
+
     if (open) {
       getGrades();
       getGenders();
@@ -90,7 +121,15 @@ const AddUpdateStudentDialog = (props) => {
 
   return (
     <Dialog maxWidth="lg" open={open} onClose={() => onClose()}>
-      <DialogTitle sx={{ minWidth: "1000px", fontSize: "30px", fontWeight: 600, color: "#212224" }}>
+      <DialogTitle
+        sx={{
+          maxWidth: "1000px",
+          minWidth: "300px",
+          fontSize: { xs: "26px", sm: "30px" },
+          fontWeight: 600,
+          color: "#212224",
+        }}
+      >
         {initialValues.id ? t("Modify Student Data") : t("Add Student")}
       </DialogTitle>
       <DialogContent sx={{ paddingBottom: "0.75rem" }}>
@@ -99,8 +138,8 @@ const AddUpdateStudentDialog = (props) => {
             validationSchema={schema}
             initialValues={{
               ...initialValues,
-              country: initialValues.country != "" ? initialValues.country : COUNTRIES[0],
-              city: initialValues.city != "" ? initialValues.city : CITIES[0],
+              // country: initialValues.country,
+              // city: initialValues.city,
               gender: initialValues.gender.id != "" ? initialValues.gender.id : gender,
               grade: initialValues.grade.id != "" ? initialValues.grade.id : grade,
               birthDate:
@@ -109,13 +148,19 @@ const AddUpdateStudentDialog = (props) => {
                   : "2000-01-01",
             }}
             onSubmit={async (values) => {
-              console.log(values);
+              console.log({
+                ...values,
+                country: selectedCountry.name,
+                city: selectedState.name,
+              });
               setChangingSlide(true);
               if (initialValues.id) {
                 axios
                   .put("/Student/Edit", {
                     ...values,
                     id: initialValues.id,
+                    country: selectedCountry.name,
+                    city: selectedState.name,
                   })
                   .then(() => {
                     update();
@@ -129,7 +174,11 @@ const AddUpdateStudentDialog = (props) => {
                   });
               } else {
                 axios
-                  .post("/Student/Add", values)
+                  .post("/Student/Add", {
+                    ...values,
+                    country: selectedCountry.name,
+                    city: selectedState.name,
+                  })
                   .then(() => {
                     update();
                     onClose();
@@ -147,10 +196,11 @@ const AddUpdateStudentDialog = (props) => {
               <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <Grid
                   container
-                  spacing={2}
+                  rowSpacing={1}
+                  columnSpacing={2}
                   sx={{ "& label": { color: "#212224", fontSize: "18px" } }}
                 >
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("First Name")}</InputLabel>
                     <TextField
                       autoFocus
@@ -168,7 +218,7 @@ const AddUpdateStudentDialog = (props) => {
                       }
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("Last Name")}</InputLabel>
                     <TextField
                       margin="dense"
@@ -183,7 +233,7 @@ const AddUpdateStudentDialog = (props) => {
                       error={errors.lastName && touched.lastName && errors.lastName ? true : false}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("Date of Birth")}</InputLabel>
                     <TextField
                       fullWidth
@@ -200,7 +250,7 @@ const AddUpdateStudentDialog = (props) => {
                       }
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("Educational Level")}</InputLabel>
                     <Select
                       fullWidth
@@ -226,43 +276,49 @@ const AddUpdateStudentDialog = (props) => {
                       )}
                     </Select>
                   </Grid>
-                  <Grid item xs={6}>
-                    <InputLabel required>{t("Country")}</InputLabel>
-                    <Select
-                      fullWidth
+                  <Grid item xs={12} sm={6}>
+                    <InputLabel>Country</InputLabel>
+                    <Autocomplete
                       id="country"
                       name="country"
-                      value={values.country}
-                      sx={{ mt: 1 }}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      {COUNTRIES.map((item) => (
-                        <MenuItem key={item} value={item}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <InputLabel required>{t("City")}</InputLabel>
-                    <Select
                       fullWidth
+                      sx={{ mt: 1 }}
+                      options={countries}
+                      getOptionLabel={(option) => option.name}
+                      renderInput={(params) => (
+                        <TextField
+                          error={!selectedCountry && touched.country ? true : false}
+                          {...params}
+                          variant="outlined"
+                        />
+                      )}
+                      value={selectedCountry}
+                      onChange={handleCountryChange}
+                      onBlur={handleBlur}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <InputLabel>City</InputLabel>
+                    <Autocomplete
                       id="city"
                       name="city"
-                      value={values.city || CITIES[0]}
+                      fullWidth
                       sx={{ mt: 1 }}
-                      onChange={handleChange}
+                      options={states}
+                      getOptionLabel={(option) => option.name}
+                      renderInput={(params) => (
+                        <TextField
+                          error={!selectedState && touched.city ? true : false}
+                          {...params}
+                          variant="outlined"
+                        />
+                      )}
+                      value={selectedState}
+                      onChange={handleStateChange}
                       onBlur={handleBlur}
-                    >
-                      {CITIES.map((item) => (
-                        <MenuItem key={item} value={item}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
+                    />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("Mobile")}</InputLabel>
                     <TextField
                       margin="dense"
@@ -280,7 +336,7 @@ const AddUpdateStudentDialog = (props) => {
                       {errors.phone && touched.phone && errors.phone}
                     </Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <InputLabel required>{t("Gender")}</InputLabel>
                     <Select
                       fullWidth
@@ -328,7 +384,7 @@ const AddUpdateStudentDialog = (props) => {
                     alignItems: "center",
                     justifyContent: "space-between",
                     gap: 2,
-                    mt: 2,
+                    my: 2,
                     "& button": {
                       flex: 1,
                     },
@@ -339,7 +395,7 @@ const AddUpdateStudentDialog = (props) => {
                     loading={changingSlide}
                     loadingPosition="center"
                     variant="contained"
-                    onClick={() => console.log(values)}
+                    // onClick={() => console.log(values)}
                   >
                     {initialValues.id ? t("Update") : t("Add")}
                   </LoadingButton>

@@ -29,15 +29,13 @@ const theme = createTheme({
             background: "#F5F5F5",
           },
           "& .MuiOutlinedInput-notchedOutline": {
-            border: "1px solid #00000038",
+            // border: "1px solid #00000038",
             borderRadius: "10px",
             overflow: "hidden",
           },
-          // "&.Mui-focused": {
-          //   "& .MuiOutlinedInput-notchedOutline": {
-          //     border: `5px dotted red`,
-          //   },
-          // },
+          "& .MuiSelect-select": {
+            padding: "12.5px 14px",
+          },
         },
       },
     },
@@ -46,6 +44,18 @@ const theme = createTheme({
         root: {
           background: "#F5F5F5",
           outlineWidth: "1px",
+          "& input": {
+            padding: "12.5px 14px",
+          },
+        },
+      },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          "& input": {
+            padding: "3.5px 4px 3.5px 5px !important",
+          },
         },
       },
     },
