@@ -37,13 +37,13 @@ const Login = () => {
         setLoading(false);
         setToken(res.data.token);
         setUser(res.data.userName);
-        navigate("/");
-        navigate(0);
+        // navigate(0);
       })
       .catch((err) => {
         setLoading(false);
         toast.error(err.response.data);
-      });
+      })
+      .finally(() => navigate("/"));
   };
 
   return (

@@ -1,6 +1,6 @@
 import Logo from "./logo.svg";
 import LoginBg from "./login-bg.svg";
-import LoginBlueBg from "./login-blue-bg.svg";
+import LoginBlueBg from "./login-blue-bg.png";
 import Student from "./student.svg";
 import Power from "./power.svg";
 

@@ -1,6 +1,9 @@
 import Axios from "axios";
 
-const TOKEN = sessionStorage.getItem("TOKEN");
+export const getToken = () => {
+  const TOKEN = sessionStorage.getItem("TOKEN");
+  return TOKEN;
+};
 
 const axios = Axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}`,
@@ -13,7 +16,7 @@ const axios = Axios.create({
 
 axios.interceptors.request.use(
   function (config) {
-    config.headers["Authorization"] = `Bearer ${TOKEN}`;
+    config.headers["Authorization"] = `Bearer ${getToken()}`;
     return config;
   },
   function (error) {
